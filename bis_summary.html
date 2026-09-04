@@ -1,0 +1,3528 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Information Systems — Exam Cheat Sheet</title>
+
+  <style>
+    :root {
+      --primary: #e9c5da;
+      --secondary: #c2e9ff;
+      --accent: #fff9cf;
+      --dark: #3a2b20;
+
+      /* พื้นหลังเดิม */
+      --bg: #f5f5f5;
+
+      --surface: #ffffff;
+      --surface-soft: #fafafa;
+
+      --text: #3a2b20;
+      --text-light: #756a63;
+      --border: #e8e8e8;
+
+      --success: #d8edcf;
+      --warning: #fff9cf;
+      --danger: #f3d1d1;
+      --info: #c2e9ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        "Noto Sans Thai",
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    body.dark {
+      --bg: #272321;
+      --surface: #332e2b;
+      --surface-soft: #3b3532;
+      --text: #f7eee9;
+      --text-light: #d1c4bd;
+      --border: #514943;
+      --dark: #3a2b20;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent)
+      );
+      color: var(--dark);
+      padding: 55px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 280px;
+      height: 280px;
+      background: rgba(255, 255, 255, 0.3);
+      top: -120px;
+      right: 5%;
+    }
+
+    .hero::after {
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.22);
+      bottom: -100px;
+      left: 10%;
+    }
+
+    .hero-content {
+      max-width: 1250px;
+      margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(58, 43, 32, 0.12);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.25;
+      margin-bottom: 16px;
+      max-width: 1000px;
+    }
+
+    .hero p {
+      max-width: 850px;
+      font-size: 16px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .hero-meta span {
+      background: rgba(255, 255, 255, 0.75);
+      padding: 7px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(58, 43, 32, 0.06);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+
+    .brand {
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-title {
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .brand-subtitle {
+      color: var(--text-light);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .nav-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-light);
+      margin-bottom: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav a {
+      padding: 9px 11px;
+      border-radius: 10px;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: var(--primary);
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .progress-box {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .progress {
+      height: 7px;
+      background: var(--surface-soft);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--primary);
+      border-radius: inherit;
+      transition: width 0.15s ease;
+    }
+
+    .main {
+      min-width: 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px 0;
+      background: rgba(245, 245, 245, 0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    body.dark .topbar {
+      background: rgba(39, 35, 33, 0.92);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .search {
+      flex: 1;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 11px 42px 11px 15px;
+      outline: none;
+    }
+
+    .search input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(238, 218, 230, 0.45);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: var(--primary);
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(58, 43, 32, 0.045);
+    }
+
+    .section > h1:first-child {
+      margin-top: 0;
+    }
+
+    .section h1 {
+      font-size: 28px;
+      line-height: 1.4;
+      margin: 25px 0 15px;
+    }
+
+    .section h2 {
+      font-size: 23px;
+      line-height: 1.45;
+      margin: 28px 0 15px;
+    }
+
+    .section h3 {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 22px 0 10px;
+    }
+
+    .section h4 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+    }
+
+    .section p {
+      margin: 9px 0;
+    }
+
+    .section ul,
+    .section ol {
+      padding-left: 28px;
+      margin: 9px 0 15px;
+    }
+
+    .section li {
+      margin: 5px 0;
+    }
+
+    .section hr {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+
+    blockquote {
+      border-left: 5px solid var(--primary);
+      background: var(--surface-soft);
+      padding: 15px 18px;
+      border-radius: 0 12px 12px 0;
+      margin: 15px 0;
+    }
+
+    /* =========================
+       CHAPTER
+    ========================= */
+
+    .chapter {
+      overflow: hidden;
+    }
+
+    .chapter-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px;
+      border-radius: 15px;
+      background: linear-gradient(
+        150deg,
+        var(--primary),
+        var(--secondary)
+      );
+      margin-bottom: 25px;
+    }
+
+    .chapter-number {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .chapter-title {
+      font-size: 21px;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
+    .chapter-body {
+      padding: 0 4px;
+    }
+
+    /* =========================
+       QUICK CARDS
+    ========================= */
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .quick-card {
+      padding: 18px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .quick-icon {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .quick-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .quick-card p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* =========================
+       CONCEPT GRID
+    ========================= */
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 18px 0;
+    }
+
+    .concept-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+    }
+
+    .concept-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    /* =========================
+       INFO BOXES
+    ========================= */
+
+    .box {
+      border-left: 5px solid var(--primary);
+      background: var(--surface-soft);
+      border-radius: 0 12px 12px 0;
+      padding: 15px 18px;
+      margin: 18px 0;
+    }
+
+    .box.key {
+      border-color: var(--primary);
+      background: #fbf0f6;
+    }
+
+    .box.exam {
+      border-color: var(--secondary);
+      background: #eef9ff;
+    }
+
+    .box.warning {
+      border-color: #e9d979;
+      background: var(--warning);
+    }
+
+    .box.info {
+      border-color: #9ed8f5;
+      background: var(--info);
+    }
+
+    .box.success {
+      border-color: #a9cf9a;
+      background: var(--success);
+    }
+
+    .box-title {
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .info-box {
+      padding: 18px;
+      border-radius: 15px;
+      background: var(--info);
+      margin: 18px 0;
+    }
+
+    .memory {
+      padding: 18px;
+      border-radius: 15px;
+      background: var(--primary);
+      margin: 18px 0;
+    }
+
+    .concept {
+      padding: 18px;
+      border-radius: 15px;
+      background: #fbf0f6;
+      border: 1px solid #ecd8e2;
+      margin: 18px 0;
+    }
+
+    .warning {
+      padding: 18px;
+      border-radius: 15px;
+      background: var(--warning);
+      border: 1px solid #eee3a8;
+      margin: 18px 0;
+    }
+
+    .exam {
+      padding: 18px;
+      border-radius: 15px;
+      background: var(--secondary);
+      border: 1px solid #a8daf3;
+      margin: 18px 0;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0 25px;
+      border-radius: 13px;
+      border: 1px solid var(--border);
+    }
+
+    table,
+    .e-rte-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--border);
+      padding: 13px 14px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary);
+      color: var(--dark);
+      font-weight: 800;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: var(--surface-soft);
+    }
+
+    tbody tr:hover td {
+      background: #fffafc;
+    }
+
+    body.dark tbody tr:hover td {
+      background: #3e3835;
+    }
+
+    /* =========================
+       CODE
+    ========================= */
+
+    code {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: var(--dark);
+      color: #fff;
+      padding: 18px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    /* =========================
+       FLOW
+    ========================= */
+
+    .flow {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 10px;
+      margin: 22px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-item {
+      flex: 1;
+      min-width: 150px;
+      padding: 15px;
+      border-radius: 13px;
+      background: var(--secondary);
+      text-align: center;
+      font-weight: 700;
+      border: 1px solid #abd9ef;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    /* =========================
+       BMC
+    ========================= */
+
+    .bmc {
+      margin: 22px 0;
+    }
+
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .bmc-card {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      padding: 15px;
+      border-radius: 12px;
+      min-height: 140px;
+    }
+
+    .bmc-card strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .bmc-card small {
+      color: var(--text-light);
+    }
+
+    /* =========================
+       CHEAT SHEET
+    ========================= */
+
+    .cheat-sheet {
+      background: var(--secondary);
+      border-radius: 18px;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .cheat-card {
+      background: var(--accent);
+      border: 1px solid rgba(58, 43, 32, 0.1);
+      padding: 17px;
+      border-radius: 14px;
+    }
+
+    .memory {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(58, 43, 32, 0.1);
+      padding: 17px;
+      border-radius: 14px;
+    }
+
+    .cheat-card strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       TAG
+    ========================= */
+
+    .tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: var(--dark);
+      font-size: 12px;
+      font-weight: 700;
+      margin: 2px;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .hidden-search {
+      display: none !important;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 30px 15px 45px;
+      color: var(--text-light);
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 220px 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bmc-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .container {
+        padding: 18px;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+      }
+
+      .sidebar.menu-open {
+        display: block;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .section {
+        padding: 22px;
+      }
+
+      .concept-grid,
+      .cheat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bmc-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .topbar {
+        padding: 8px 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 38px 20px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        padding: 12px;
+      }
+
+      .section {
+        padding: 17px;
+        border-radius: 15px;
+      }
+
+      .section h1 {
+        font-size: 24px;
+      }
+
+      .section h2 {
+        font-size: 20px;
+      }
+
+      .section h3 {
+        font-size: 17px;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bmc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        flex-direction: column;
+      }
+
+      .arrow {
+        justify-content: center;
+        transform: rotate(90deg);
+      }
+
+      .top-actions {
+        gap: 5px;
+      }
+
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+      }
+    }
+
+    /* =========================
+       PRINT
+    ========================= */
+
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .hero {
+        background: #fff;
+        color: #000;
+        padding: 20px 0;
+      }
+
+      .sidebar,
+      .topbar,
+      .top-actions,
+      .search,
+      .mobile-menu {
+        display: none !important;
+      }
+
+      .container {
+        max-width: none;
+        padding: 0;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .section {
+        box-shadow: none;
+        border: 0;
+        padding: 10px 0;
+        break-inside: avoid;
+      }
+
+      .chapter {
+        break-inside: avoid;
+      }
+
+      .box,
+      .info-box,
+      .memory,
+      .concept,
+      .warning,
+      .exam {
+        break-inside: avoid;
+      }
+
+      table {
+        page-break-inside: auto;
+      }
+
+      tr {
+        page-break-inside: avoid;
+      }
+
+      footer {
+        padding-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <header class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">📚 EXAM PREPARATION GUIDE</span>
+
+      <h1>
+        📘 คู่มือเรียนและชีทสรุปเตรียมสอบ:
+        Business Foundations and IS Strategic Integration
+      </h1>
+
+      <p>
+        ระบบสารสนเทศทางธุรกิจและการบูรณาการเชิงกลยุทธ์
+        (Business Information Systems &amp; Strategic Integration)
+      </p>
+
+      <div class="hero-meta">
+        <span>🎓 Business Information Systems</span>
+        <span>🧠 Detailed Course Content</span>
+        <span>📝 Exam Cheat Sheet</span>
+        <span>💡 Practice Exam</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+
+      <!-- =========================
+           SIDEBAR
+      ========================= -->
+
+      <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+          <div class="brand-title">📘 BIS Study Guide</div>
+          <div class="brand-subtitle">Business Information Systems</div>
+        </div>
+
+        <div class="nav-title">สารบัญ</div>
+
+        <nav class="nav">
+          <a href="#intro">🚪 บทนำ</a>
+          <a href="#chapter1">📁 บทที่ 1</a>
+          <a href="#chapter2">📁 บทที่ 2</a>
+          <a href="#chapter3">📁 บทที่ 3</a>
+          <a href="#chapter4">📁 บทที่ 4</a>
+          <a href="#chapter5">📁 บทที่ 5</a>
+          <a href="#cheatsheet">📝 Cheat Sheet</a>
+          <a href="#vocabulary">📖 Vocabulary</a>
+          <a href="#understanding">🧠 Understanding</a>
+          <a href="#memorization">⭐ Memorization</a>
+          <a href="#confusing">⚠️ จุดสับสน</a>
+          <a href="#final">🚨 อ่านก่อนสอบ</a>
+        </nav>
+
+        <div class="progress-box">
+          <div class="progress-label">
+            <span>Reading Progress</span>
+            <span id="progressText">0%</span>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- =========================
+           MAIN
+      ========================= -->
+
+      <main class="main">
+
+        <div class="topbar">
+
+          <button
+            class="icon-btn mobile-menu"
+            id="menuBtn"
+            aria-label="เปิดเมนู"
+          >
+            ☰
+          </button>
+
+          <div class="search">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="🔍 ค้นหาเนื้อหา เช่น BPR, SWOT, HRIS..."
+            >
+            <span class="search-icon">⌕</span>
+          </div>
+
+          <div class="top-actions">
+            <button
+              class="icon-btn"
+              id="darkBtn"
+              aria-label="เปลี่ยนโหมด"
+              title="Dark Mode"
+            >
+              🌙
+            </button>
+
+            <button
+              class="icon-btn"
+              onclick="window.print()"
+              aria-label="พิมพ์"
+              title="Print"
+            >
+              🖨️
+            </button>
+          </div>
+
+        </div>
+
+        <div class="content" id="content">
+
+          <!-- =========================
+               INTRO
+          ========================= -->
+
+          <section class="section" id="intro">
+
+            <h1>
+              📘 คู่มือเรียนและชีทสรุปเตรียมสอบ:
+              Business Foundations and IS Strategic Integration
+            </h1>
+
+            <blockquote>
+              <p>
+                <strong>วิชา:</strong>
+                ระบบสารสนเทศทางธุรกิจและการบูรณาการเชิงกลยุทธ์
+                (Business Information Systems &amp; Strategic Integration)
+                <br>
+                <strong>ผู้จัดทำ:</strong>
+                อาจารย์ผู้สอน + ติวเตอร์ระบบสารสนเทศ (Gemini Notebook)
+              </p>
+            </blockquote>
+
+            <hr>
+
+            <h1>
+              🚪 ส่วนที่ 1: อธิบายเนื้อหาแบบเจาะลึกรายบท
+              (Detailed Course Content)
+            </h1>
+
+          </section>
+
+          <!-- =========================
+               CHAPTER 1
+          ========================= -->
+
+          <section class="section chapter" id="chapter1">
+
+            <div class="chapter-header">
+              <div class="chapter-number">01</div>
+              <div class="chapter-title">
+                📁 บทที่ 1: บทนำสู่ธุรกิจและระบบสารสนเทศ
+                (Introduction to Business &amp; Information Systems)
+              </div>
+            </div>
+
+            <div class="chapter-body">
+
+              <h3>1. คืออะไร?</h3>
+
+              <ul>
+                <li>
+                  <strong>ความหมาย:</strong>
+                  <strong>ธุรกิจ (Business)</strong>
+                  คือ กิจกรรมในการผลิต การจัดจำหน่าย และการให้บริการเพื่อ
+                  ตอบสนองความต้องการของผู้บริโภคในสังคม โดยมีเป้าหมายหลัก
+                  ในการสร้างกำไรและสร้างคุณค่าเชิงสังคม 
+                </li>
+
+                <li>
+                  <strong>แนวคิดหลัก:</strong>
+                  การใช้ทรัพยากรที่มีอยู่อย่างจำกัดมาขับเคลื่อนให้เกิด
+                  มูลค่าเพิ่ม ผ่านการประสานงานของหน้าที่ธุรกิจต่างๆ 
+                </li>
+
+                <li>
+                  <strong>จุดประสงค์:</strong>
+                  เพื่อสร้างผลตอบแทนทางเศรษฐกิจให้กับผู้ประกอบการ
+                  ขับเคลื่อน GDP ของประเทศ และสร้างงานสร้างอาชีพแก่ประชาชน 
+                </li>
+
+                <li>
+                  <strong>ใช้ทำอะไร:</strong>
+                  ใช้ระบุบทบาท หน้าที่ และรูปแบบการจัดตั้งธุรกิจ
+                  เพื่อให้สามารถวางรากฐานการเชื่อมโยงระบบสารสนเทศ
+                  เข้ากับขั้นตอนต่าง ๆ ได้อย่างเหมาะสม
+                </li>
+              </ul>
+
+              <h3>2. อธิบายให้เข้าใจ</h3>
+
+              <p>
+                ธุรกิจไม่ใช่แค่การ "ซื้อมาขายไป" เท่านั้น
+                แต่มีโครงสร้างภายในที่ทำงานประสานกันเหมือนอวัยวะต่าง ๆ
+                ของมนุษย์ ซึ่งแบ่งออกเป็น
+                <strong>6 หน้าที่หลักทางธุรกิจ (Core Business Functions)</strong>
+                ได้แก่:
+              </p>
+
+              <ol>
+                <li>
+                  <strong>การผลิต (Production):</strong>
+                  การสร้างสินค้าหรือบริการเพื่อตอบสนองผู้บริโภค 
+                </li>
+
+                <li>
+                  <strong>การตลาด (Marketing):</strong>
+                  การวิเคราะห์ตลาด การเข้าถึงลูกค้าด้วยกลยุทธ์ 4P 
+                </li>
+
+                <li>
+                  <strong>การเงิน (Finance):</strong>
+                  การจัดหาและบริหารเงินทุนขององค์กร 
+                </li>
+
+                <li>
+                  <strong>ทรัพยากรมนุษย์ (HRM):</strong>
+                  การสรรหา พัฒนา และดูแลรักษาพนักงาน 
+                </li>
+
+                <li>
+                  <strong>การบัญชี (Accounting):</strong>
+                  การบันทึกและรายงานธุรกรรมทางการเงินของธุรกิจ 
+                </li>
+
+                <li>
+                  <strong>การจัดการ / IT (Management &amp; IT):</strong>
+                  การประสานงานด้วยข้อมูลและเทคโนโลยีเพื่อควบคุมการทำงาน 
+                </li>
+              </ol>
+
+              <h3>3. ทำงานอย่างไร? (กระบวนการทางธุรกิจและการสร้างมูลค่า)</h3>
+
+              <div class="flow">
+                <div class="flow-item">Supplier<br>จัดหาวัตถุดิบ</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Business<br>ผลิต / ให้บริการ</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Seller / Deliver<br>จำหน่าย / ส่งมอบ</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">Customer Value<br>คุณค่าลูกค้า</div>
+              </div>
+
+              <ul>
+                <li>
+                  <strong>เหตุผลของแต่ละขั้นตอน:</strong>
+                  <ul>
+                    <li>
+                      <strong>จัดหาวัตถุดิบ:</strong>
+                      เพื่อควบคุมต้นทุนและคุณภาพตั้งแต่ต้นน้ำ
+                    </li>
+
+                    <li>
+                      <strong>ผลิต/ให้บริการ:</strong>
+                      นำวัตถุดิบมาแปรสภาพ สร้างมูลค่าเพิ่ม (Value-added)
+                    </li>
+
+                    <li>
+                      <strong>จำหน่าย/ส่งมอบ:</strong>
+                      นำสินค้าไปกระจายสู่ทุกพื้นที่เพื่อให้ถึงมือลูกค้า
+                    </li>
+
+                    <li>
+                      <strong>ตอบสนองลูกค้า:</strong>
+                      เพื่อเก็บรวบรวมข้อมูลป้อนกลับ (Feedback)
+                      นำมาพัฒนาธุรกิจต่อ 
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h3>4. ตัวอย่าง</h3>
+
+              <ul>
+                <li>
+                  <strong>ตัวอย่างการประยุกต์ใช้ระบบสารสนเทศ (BIS):</strong>
+                  บริษัทจัดส่งอาหารอย่าง <strong>Grab</strong>
+                  หรืออีคอมเมิร์ซอย่าง <strong>Amazon</strong>
+                  นำระบบสารสนเทศมาวิเคราะห์ความต้องการเชิงลึกของลูกค้า
+                  เพื่อคาดการณ์ยอดขายและการส่งมอบบริการได้อย่างแม่นยำ
+                  และเรียลไทม์
+                </li>
+
+                <li>
+                  <strong>ตัวอย่างกลไกราคา (Price Mechanism):</strong>
+                  <ul>
+                    <li>
+                      <strong>อุปสงค์ (Demand):</strong>
+                      เมื่อราคาสินค้าสูงขึ้น ปริมาณความต้องการซื้อ
+                      ของผู้บริโภคจะลดลง
+                    </li>
+
+                    <li>
+                      <strong>อุปทาน (Supply):</strong>
+                      เมื่อราคาสินค้าสูงขึ้น ผู้ผลิตจะต้องการผลิต
+                      และขายสินค้าเพิ่มขึ้น
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h3>
+                5. ตารางเปรียบเทียบรูปแบบการประกอบธุรกิจ
+                (Business Ownership)
+              </h3>
+
+              <div class="table-wrap">
+                <table class="e-rte-table">
+                  <thead>
+                    <tr>
+                      <th>หัวข้อ</th>
+                      <th>ไม่เป็นนิติบุคคล (Non-Juristic / Unincorporated)</th>
+                      <th>เป็นนิติบุคคล (Juristic / Incorporated)</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td><strong>ความหมาย</strong></td>
+                      <td>
+                        กิจการที่ตัวเจ้าของและธุรกิจไม่มีการแยกสถานะ
+                        ทางกฎหมายออกจากกัน
+                      </td>
+                      <td>
+                        กิจการที่จดทะเบียนจัดตั้งแยกตัวตนออกมาเป็นบุคคลสมมติ
+                        ทางกฎหมาย
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>รูปแบบย่อย</strong></td>
+                      <td>
+                        กิจการเจ้าของคนเดียว (Sole Proprietorship),
+                        ห้างหุ้นส่วนสามัญไม่จดทะเบียน
+                      </td>
+                      <td>
+                        บริษัทจำกัด, บริษัทมหาชนจำกัด,
+                        สตาร์ทอัพที่จดทะเบียน
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ความรับผิดชอบ</strong></td>
+                      <td>
+                        เจ้าของต้องรับผิดชอบหนี้สินทั้งหมดของกิจการ
+                        โดยไม่จำกัดจำนวน
+                      </td>
+                      <td>
+                        รับผิดชอบหนี้สินจำกัดไม่เกินจำนวนเงินทุน
+                        ที่จดทะเบียนไว้
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>การใช้ระบบ IT</strong></td>
+                      <td>
+                        มักใช้ระบบ IT ขนาดเล็ก ทั่วไป ไม่ซับซ้อน
+                      </td>
+                      <td>
+                        ต้องใช้ระบบขนาดใหญ่ (ERP, CRM)
+                        เพื่อความปลอดภัยและรองรับการขยายตัว
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>6. จุดสำคัญ</h3>
+
+              <div class="box key">
+                <div class="box-title">⭐ Concept ที่ต้องเข้าใจ</div>
+                ระบบสารสนเทศไม่ได้อยู่โดดเดี่ยว แต่มีหน้าที่สนับสนุน
+                การสร้างมูลค่าในทุก ๆ ขั้นตอนของกระบวนการทางธุรกิจ
+                ตั้งแต่ต้นน้ำจนถึงปลายน้ำ
+              </div>
+
+              <div class="box warning">
+                <div class="box-title">⚠️ จุดที่มักเข้าใจผิด</div>
+                อุปสงค์ (Demand) สะท้อนความต้องการซื้อที่มี
+                "กำลังซื้อจริง (Purchasing Power)" รองรับเท่านั้น
+                ไม่ใช่แค่ความต้องการอยากได้ธรรมดา
+              </div>
+
+              <div class="box exam">
+                <div class="box-title">📝 ประเด็นที่มีโอกาสออกสอบ</div>
+                การจัดประเภทระบบสารสนเทศตามระดับการบริหารจัดการ
+                (Strategic - Tactical - Operational)
+                และการเปรียบเทียบระดับความสรุปของข้อมูล
+              </div>
+
+            </div>
+          </section>
+
+          <!-- =========================
+               CHAPTER 2
+          ========================= -->
+
+          <section class="section chapter" id="chapter2">
+
+            <div class="chapter-header">
+              <div class="chapter-number">02</div>
+              <div class="chapter-title">
+                📁 บทที่ 2: องค์กรและระบบสารสนเทศ
+                (Organization and Business Information Systems)
+              </div>
+            </div>
+
+            <div class="chapter-body">
+
+              <h3>1. คืออะไร?</h3>
+
+              <ul>
+                <li>
+                  <strong>ความหมาย:</strong>
+                  <strong>ระบบสารสนเทศ (Information System: IS)</strong>
+                  คือ ส่วนผสมที่มีการจัดระเบียบของ บุคลากร (People),
+                  ฮาร์ดแวร์ (Hardware), ซอฟต์แวร์ (Software),
+                  เครือข่ายการสื่อสาร (Networks) และทรัพยากรข้อมูล
+                  (Data Resources) ที่ทำงานร่วมกันเพื่อจัดเก็บ แปลงสภาพ
+                  และกระจายสารสนเทศภายในองค์กร
+                </li>
+
+                <li>
+                  <strong>แนวคิดหลัก:</strong>
+                  การใช้ระบบไอทีขับเคลื่อนประสิทธิภาพ (Efficiency)
+                  และประสิทธิผล (Effectiveness) ในกระบวนการทำงาน
+                  การตัดสินใจ และการทำงานร่วมกัน
+                </li>
+
+                <li>
+                  <strong>จุดประสงค์:</strong>
+                  เพื่อสนับสนุนการทำงานประจำวัน การตัดสินใจของผู้บริหาร
+                  และสร้างความได้เปรียบในการแข่งขัน
+                </li>
+
+                <li>
+                  <strong>ใช้ทำอะไร:</strong>
+                  ใช้จัดเก็บประมวลผลธุรกรรมทางธุรกิจและแปลงข้อมูล
+                  ให้กลายเป็นสินทรัพย์ที่มีค่าต่อการตัดสินใจเชิงกลยุทธ์
+                </li>
+              </ul>
+
+              <h3>2. อธิบายให้เข้าใจ</h3>
+
+              <p>
+                เพื่อให้เข้าใจง่ายที่สุด ให้คิดว่า
+                <strong>ระบบสารสนเทศ (IS)</strong> คือ "ครัวขนาดใหญ่"
+                [ความรู้เพิ่มเติม]
+              </p>
+
+              <div class="concept-grid">
+
+                <div class="concept-card">
+                  <strong>🥕 Data Resources</strong>
+                  เปรียบเสมือน "วัตถุดิบดิบ"
+                  เช่น รายการตัวเลขยอดขายที่ยังไม่ได้จัดกลุ่ม
+                </div>
+
+                <div class="concept-card">
+                  <strong>🍱 Information</strong>
+                  เปรียบเสมือน "อาหารที่ปรุงสำเร็จและจัดจานแล้ว"
+                  เช่น รายงานยอดขายแยกตามภูมิภาครายเดือน
+                </div>
+
+                <div class="concept-card">
+                  <strong>🍳 Information Technology</strong>
+                  เปรียบเหมือน "อุปกรณ์ในครัว"
+                  เช่น เตาอบ เครื่องปั่น ตู้เย็น
+                </div>
+
+              </div>
+
+              <h3>3. ทำงานอย่างไร? (ทฤษฎีระบบและการทำงาน)</h3>
+
+              <div class="flow">
+                <div class="flow-item">
+                  Input<br>
+                  นำเข้าข้อมูลธุรกรรม
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  Processing<br>
+                  ประมวลผล / แปรสภาพ
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  Output<br>
+                  รายงาน / เอกสาร
+                </div>
+              </div>
+
+              <p>
+                ตามหลักการทางระบบ (System Theory)
+                จะมีฟังก์ชันพื้นฐาน 3 ส่วนที่ทำงานประสานกันดังนี้
+              </p>
+
+              <ul>
+                <li>
+                  <strong>Storage (จัดเก็บ):</strong>
+                  บันทึกประวัติและข้อมูลอย่างเป็นระบบในฐานข้อมูล
+                  (Database) หรือฐานความรู้ (Knowledge base)
+                </li>
+
+                <li>
+                  <strong>Control &amp; Feedback (ควบคุม):</strong>
+                  คอยตรวจสอบประสิทธิภาพของระบบ เช่น ส่งเสียงเตือน
+                  เมื่อคีย์ข้อมูลสินค้าไม่ถูกต้องเพื่อจำกัดความผิดพลาด
+                </li>
+              </ul>
+
+              <h3>4. ตัวอย่างการทำงานจริงของ IS</h3>
+
+              <ol>
+                <li>
+                  <strong>Input:</strong>
+                  พนักงานขายทำการแสกนบาร์โค้ดของสินค้าที่จุดชำระเงิน
+                  (POS)
+                </li>
+
+                <li>
+                  <strong>Processing:</strong>
+                  ระบบนำรหัสสินค้ามาคำนวณราคารวม ภาษีมูลค่าเพิ่ม
+                  และการลดจำนวนในคลังสินค้า
+                </li>
+
+                <li>
+                  <strong>Output:</strong>
+                  เครื่องพิมพ์ใบเสร็จพิมพ์ใบกำกับภาษีอย่างย่อ
+                  ส่งมอบให้แก่ลูกค้า
+                </li>
+
+                <li>
+                  <strong>Storage:</strong>
+                  ระบบทำการอัปเดตระดับสินค้าคงคลังในฐานข้อมูลกลางทันที
+                </li>
+              </ol>
+
+              <h3>5. ตารางเปรียบเทียบ IS และ IT</h3>
+
+              <div class="table-wrap">
+                <table class="e-rte-table">
+                  <thead>
+                    <tr>
+                      <th>หัวข้อ</th>
+                      <th>Information Systems (IS)</th>
+                      <th>Information Technology (IT)</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td><strong>ความหมาย</strong></td>
+                      <td>
+                        ระบบที่ประกอบด้วยทรัพยากรทั้งหมด
+                        (คน, ข้อมูล, กระบวนการ และเทคโนโลยี)
+                        เพื่อจัดการสารสนเทศ
+                      </td>
+                      <td>
+                        เครื่องมือ อุปกรณ์ และเทคโนโลยีเฉพาะด้าน
+                        ที่ใช้ในการสร้างและดูแลระบบสารสนเทศ
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ขอบเขต</strong></td>
+                      <td>
+                        กว้างกว่า ครอบคลุมถึงบุคลากร วัฒนธรรมองค์กร
+                        และนโยบายการทำงาน 
+                      </td>
+                      <td>
+                        แคบกว่า เน้นเฉพาะฝั่งฮาร์ดแวร์ ซอฟต์แวร์
+                        เครือข่าย และฐานข้อมูล
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ตัวอย่าง</strong></td>
+                      <td>
+                        ระบบประเมินผลพนักงาน,
+                        ระบบบริหารห่วงโซ่อุปทาน (SCM)
+                      </td>
+                      <td>
+                        คอมพิวเตอร์ CPU,
+                        ซอฟต์แวร์ระบบปฏิบัติการ Windows,
+                        สายเคเบิลใยแก้วนำแสง
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>6. จุดสำคัญ</h3>
+
+              <div class="box key">
+                <div class="box-title">⭐ Concept ที่ต้องเข้าใจ</div>
+                ธุรกิจเปรียบเสมือน <strong>Open System (ระบบเปิด)</strong>
+                ที่ต้องปฏิสัมพันธ์กับสิ่งแวดล้อมภายนอก และเป็น
+                <strong>Adaptive System (ระบบปรับตัว)</strong>
+                ที่ต้องปรับเปลี่ยนตัวเองให้เข้ากับสถานการณ์เพื่อความอยู่รอด
+              </div>
+
+              <div class="box warning">
+                <div class="box-title">⚠️ จุดที่มักเข้าใจผิด</div>
+                หลายคนคิดว่า IS และ IT คือสิ่งเดียวกัน แต่แท้จริงแล้ว
+                IT เป็นเพียงส่วนหนึ่งของเครื่องมือที่นำมาประกอบขึ้นเป็น IS เท่านั้น
+              </div>
+
+              <div class="box exam">
+                <div class="box-title">📝 ประเด็นที่มีโอกาสออกสอบ</div>
+
+                <ul>
+                  <li>
+                    คุณลักษณะของคุณภาพสารสนเทศ
+                    (Attributes of Information Quality) 3 มิติ:
+                    <strong>Time</strong>, <strong>Content</strong>
+                    และ <strong>Form</strong>
+                  </li>
+
+                  <li>
+                    การเปรียบเทียบระดับการจัดการและการตัดสินใจ
+                    <strong>
+                      Operational: Structured Decisions
+                      →
+                      Tactical: Semi-structured Decisions
+                      →
+                      Strategic: Unstructured Decisions
+                    </strong>
+                    [23]
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- =========================
+               CHAPTER 3
+          ========================= -->
+
+          <section class="section chapter" id="chapter3">
+
+            <div class="chapter-header">
+              <div class="chapter-number">03</div>
+
+              <div class="chapter-title">
+                📁 บทที่ 3: กระบวนการทางธุรกิจ โมเดลธุรกิจ
+                และการวิเคราะห์ปัญหา
+                (Business Process, BMC, &amp; BPR)
+              </div>
+            </div>
+
+            <div class="chapter-body">
+
+              <h3>1. คืออะไร?</h3>
+
+              <ul>
+                <li>
+                  <strong>ความหมาย:</strong>
+
+                  <ul>
+                    <li>
+                      <strong>โมเดลธุรกิจ (Business Model):</strong>
+                      วิธีการดำเนินธุรกิจเพื่อให้มีรายได้มาหล่อเลี้ยงองค์กร
+                      อย่างยั่งยืน
+                    </li>
+
+                    <li>
+                      <strong>กระบวนการทางธุรกิจ (Business Process):</strong>
+                      ขั้นตอนการทำงานที่ประสานสัมพันธ์กันเพื่อแปรสภาพ
+                      ปัจจัยนำเข้าให้เป็นผลลัพธ์ที่เป็นคุณค่าแก่ลูกค้า
+                    </li>
+
+                    <li>
+                      <strong>การปรับรื้อปรับระบบ (BPR):</strong>
+                      การคิดทบทวนแนวทางการทำงานใหม่ตั้งแต่รากฐาน
+                      อย่างถอนรากถอนโคน
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <strong>แนวคิดหลัก:</strong>
+                  การสร้างความสอดคล้องระหว่างคุณค่าที่นำเสนอต่อลูกค้า
+                  ขีดความสามารถในการดำเนินงาน และความอยู่รอดทางการเงิน
+                </li>
+
+                <li>
+                  <strong>จุดประสงค์:</strong>
+                  เพื่อสร้างประสิทธิภาพระดับก้าวกระโดดและกำจัดขั้นตอน
+                  ที่ไร้ประสิทธิภาพในองค์กร
+                </li>
+              </ul>
+
+              <h3>2. อธิบายให้เข้าใจ</h3>
+
+              <p>
+                กระบวนการทางธุรกิจอาจเกิดขึ้นภายในแผนกเดียว เช่น
+                การปิดบัญชีประจำเดือน (Finance &amp; Accounting)
+                หรือเป็น <strong>กระบวนการข้ามฟังก์ชัน
+                (Cross-Functional Process)</strong>
+                ที่วิ่งผ่านหลายหน่วยงาน เช่น
+                <strong>กระบวนการสั่งซื้อสินค้าจนกระทั่งได้รับสินค้า
+                (Order Fulfillment Process)</strong>
+              </p>
+
+              <p>
+                ถ้าพนักงานต่างคนต่างทำงานในขอบเขตแผนกตัวเอง
+                (Silo) โดยไม่มีระบบสารสนเทศคอยเชื่อมโยงข้อมูล
+                กระบวนการส่งมอบสินค้าจะเกิดความล่าช้า ข้อมูลผิดพลาด
+                และสูญเสียลูกค้าในที่สุด
+              </p>
+
+              <h3>
+                3. ทำงานอย่างไร?
+                (ตัวอย่างกระบวนการสั่งซื้อสินค้าข้ามแผนก)
+              </h3>
+
+              <div class="flow">
+                <div class="flow-item">
+                  ฝ่ายขาย<br>
+                  Sales: รับคำสั่งซื้อ
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  ฝ่ายบัญชี<br>
+                  Accounting: ตรวจสอบเครดิต
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  ฝ่ายผลิต<br>
+                  Manufacturing: ผลิตและจัดส่ง
+                </div>
+              </div>
+
+              <ul>
+                <li>
+                  <strong>เหตุผลของแต่ละขั้นตอน:</strong>
+
+                  <ol>
+                    <li>
+                      <strong>ฝ่ายขายรับคำซื้อ:</strong>
+                      เพื่อเปิดโอกาสการสร้างรายได้และบันทึก
+                      ความต้องการลูกค้า
+                    </li>
+
+                    <li>
+                      <strong>ฝ่ายบัญชีตรวจสอบเครดิต:</strong>
+                      ป้องกันความเสี่ยงจากการผิดนัดชำระหนี้
+                      ก่อนที่จะอนุญาตให้ผลิต
+                    </li>
+
+                    <li>
+                      <strong>ฝ่ายผลิตดำเนินงาน:</strong>
+                      เพื่อแปรสภาพวัตถุดิบและส่งสินค้าไปยังมือผู้ซื้อ
+                      อย่างถูกต้องตามเงื่อนไข
+                    </li>
+                  </ol>
+                </li>
+              </ul>
+
+              <h3>
+                4. ตัวอย่าง
+                (Business Model Canvas: BMC 9 Elements)
+              </h3>
+
+              <p>
+                โมเดลธุรกิจที่ดีสามารถสรุปได้ผ่านเฟรมเวิร์ก
+                <strong>Business Model Canvas (BMC)</strong>
+                ซึ่งมี 9 องค์ประกอบหลัก:
+              </p>
+
+              <div class="bmc">
+                <div class="bmc-grid">
+
+                  <div class="bmc-card">
+                    <strong>1. Customer Segments</strong>
+                    กลุ่มลูกค้า
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>2. Value Propositions</strong>
+                    คุณค่าที่นำเสนอ
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>3. Channels</strong>
+                    ช่องทาง
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>4. Customer Relationships</strong>
+                    ความสัมพันธ์กับลูกค้า
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>5. Revenue Streams</strong>
+                    กระแสรายได้
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>6. Key Resources</strong>
+                    ทรัพยากรหลัก
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>7. Key Activities</strong>
+                    กิจกรรมหลัก
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>8. Key Partnerships</strong>
+                    พันธมิตรหลัก
+                  </div>
+
+                  <div class="bmc-card">
+                    <strong>9. Cost Structure</strong>
+                    โครงสร้างต้นทุน
+                  </div>
+
+                </div>
+              </div>
+
+              <ol>
+                <li>
+                  <strong>Customer Segments (กลุ่มลูกค้า):</strong>
+                  กลุ่มคนที่ธุรกิจตั้งใจจะสร้างคุณค่าให้
+                </li>
+
+                <li>
+                  <strong>Value Propositions (คุณค่าที่นำเสนอ):</strong>
+                  ชุดสินค้า/บริการที่ตอบโจทย์ความต้องการของกลุ่มลูกค้า
+                </li>
+
+                <li>
+                  <strong>Channels (ช่องทาง):</strong>
+                  วิธีการที่ธุรกิจใช้สื่อสาร ขาย และส่งมอบค่านิยม
+                  ไปยังลูกค้า
+                </li>
+
+                <li>
+                  <strong>Customer Relationships:</strong>
+                  วิธีที่ดึงดูด รักษา และสร้างฐานลูกค้าเพิ่มขึ้น
+                  เช่น ระบบ CRM, Chatbots
+                </li>
+
+                <li>
+                  <strong>Revenue Streams:</strong>
+                  แหล่งที่มาของรายได้ที่เกิดจากค่านิยม
+                  ที่ลูกค้าพึงพอใจ
+                </li>
+
+                <li>
+                  <strong>Key Resources:</strong>
+                  สินทรัพย์ที่จำเป็นในการดำเนินงาน
+                  เช่น คน ข้อมูล เทคโนโลยี ทุน
+                </li>
+
+                <li>
+                  <strong>Key Activities:</strong>
+                  กิจกรรมที่ต้องทำเพื่อให้ธุรกิจเดินหน้าได้
+                  เช่น การผลิต การแก้ปัญหา
+                </li>
+
+                <li>
+                  <strong>Key Partnerships:</strong>
+                  เครือข่ายคู่ค้าและผู้จัดหาสินค้าเพื่อลดความเสี่ยง
+                </li>
+
+                <li>
+                  <strong>Cost Structure:</strong>
+                  ค่าใช้จ่ายหลักทั้งหมดในการขับเคลื่อนโมเดลธุรกิจ
+                </li>
+              </ol>
+
+              <div class="memory">
+                <strong>💰 สูตรคำนวณกำไรพื้นฐาน</strong>
+
+                <p>
+                  <strong>
+                    Profit = Revenue Streams − Cost Structure
+                  </strong>
+                </p>
+              </div>
+
+              <h3>
+                5. ตารางเปรียบเทียบระดับการเปลี่ยนแปลงกระบวนการทางธุรกิจ
+                (Spectrum of Change)
+              </h3>
+
+              <div class="table-wrap">
+                <table class="e-rte-table">
+
+                  <thead>
+                    <tr>
+                      <th>หัวข้อ</th>
+                      <th>Automation</th>
+                      <th>BPR</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr>
+                      <td><strong>แนวคิด</strong></td>
+                      <td>
+                        นำคอมพิวเตอร์และระบบไอทีมาช่วยทำแทนงานเดิม
+                        ที่เป็นแมนนวล
+                      </td>
+                      <td>
+                        ทบทวนแนวทางใหม่ตั้งแต่ต้นอย่างถอนรากถอนโคน
+                        (Radical Redesign)
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ระดับการทำงาน</strong></td>
+                      <td>
+                        นำไอทีมาครอบงานเดิม
+                        ไม่เน้นเปลี่ยนขั้นตอนการทำงานเดิม
+                      </td>
+                      <td>
+                        ออกแบบรูปแบบการทำงานใหม่ทั้งหมด
+                        ไม่ใช่แค่ทำเรื่องเดิมให้เร็วขึ้น
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ผลตอบแทน</strong></td>
+                      <td>ต่ำ - ปานกลาง</td>
+                      <td>สูงมาก (แบบก้าวกระโดด)</td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ความเสี่ยง</strong></td>
+                      <td>ต่ำ</td>
+                      <td>สูงมาก</td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ตัวอย่าง</strong></td>
+                      <td>
+                        เปลี่ยนจากเขียนกระดาษเป็นบันทึกข้อมูล
+                        ในฐานข้อมูล
+                      </td>
+                      <td>
+                        เปลี่ยนจากระบบตรวจสอบเอกสารทีละโต๊ะ
+                        เป็นระบบอนุมัติอัตโนมัติข้ามฟังก์ชัน
+                        ผ่านคลาวด์
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>6. จุดสำคัญ</h3>
+
+              <div class="box key">
+                <div class="box-title">⭐ Concept ที่ต้องเข้าใจ</div>
+                <strong>BPR</strong> ไม่ใช่แค่การนำคอมพิวเตอร์มาทำงานแทนคน
+                (Automation) แต่เป็น
+                "การออกแบบขั้นตอนวิธีการใหม่ทั้งหมด"
+                เพื่อแก้ไขจุดคอขวด
+              </div>
+
+              <div class="box warning">
+                <div class="box-title">⚠️ จุดที่มักเข้าใจผิด</div>
+                การทำโมเดลธุรกิจไม่ได้มีเป้าหมายแค่หาวิธีขายของ
+                แต่เป็นการจัดวางระบบเพื่อให้เกิดความสมดุลระหว่าง
+                คุณค่าที่ลูกค้าได้ (Customer Value Proposition)
+                ขีดความสามารถภายใน และความคุ้มค่าทางการเงิน
+              </div>
+
+              <div class="box exam">
+                <div class="box-title">📝 ประเด็นที่มีโอกาสออกสอบ</div>
+
+                <p>
+                  <strong>
+                    Performance Measurement Process 4 ขั้นตอน:
+                  </strong>
+                </p>
+
+                <ol>
+                  <li>Set desired performance levels</li>
+                  <li>Determine the strategy and plans</li>
+                  <li>Monitor actual performance</li>
+                  <li>Adjust goals or performance</li>
+                </ol>
+
+                <p>
+                  <strong>
+                    Automation → Rationalization → Reengineering
+                    → Paradigm Shift
+                  </strong>
+                  [55]
+                </p>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- =========================
+               CHAPTER 4
+          ========================= -->
+
+          <section class="section chapter" id="chapter4">
+
+            <div class="chapter-header">
+              <div class="chapter-number">04</div>
+
+              <div class="chapter-title">
+                📁 บทที่ 4: กลยุทธ์และระบบสารสนเทศเชิงกลยุทธ์
+                (Strategy &amp; Strategic Information Systems)
+              </div>
+            </div>
+
+            <div class="chapter-body">
+
+              <h3>1. คืออะไร?</h3>
+
+              <ul>
+                <li>
+                  <strong>ความหมาย:</strong>
+                  <strong>
+                    ระบบสารสนเทศเชิงกลยุทธ์
+                    (Strategic Information System: SIS)
+                  </strong>
+                  คือ ระบบสารสนเทศในระดับใด ๆ
+                  (EIS, DSS, MIS, TPS) ที่ช่วยเปลี่ยนทิศทางเป้าหมาย
+                  กระบวนการ ผลิตภัณฑ์ หรือความสัมพันธ์ภายนอก
+                  เพื่อสร้างความได้เปรียบในการแข่งขันอย่างยั่งยืน
+                </li>
+
+                <li>
+                  <strong>แนวคิดหลัก:</strong>
+                  <strong>การสอดประสานทางธุรกิจกับไอที (IT Alignment)</strong>
+                  กล่าวคือ ไอทีต้องสอดคล้องและช่วยตอบสนองเป้าหมายหลักสูงสุด
+                  ของธุรกิจเสมอ
+                </li>
+
+                <li>
+                  <strong>จุดประสงค์:</strong>
+                  เพื่อใช้เทคโนโลยีและข้อมูลเป็น "อาวุธ"
+                  ในการเอาชนะคู่แข่งและก้าวผ่าน Digital Disruption
+                </li>
+
+                <li>
+                  <strong>ใช้ทำอะไร:</strong>
+                  ใช้ระบุความสามารถที่เหนือกว่าของกิจการผ่านการทำ
+                  SWOT Analysis และออกแบบระบบเพื่อสร้างความแตกต่าง
+                  (Differentiation) หรือลดต้นทุนให้ต่ำที่สุด
+                  (Cost Leadership)
+                </li>
+              </ul>
+
+              <h3>2. อธิบายให้เข้าใจ</h3>
+
+              <p>
+                ในการตัดสินใจลงทุนทางไอที องค์กรที่ประสบความสำเร็จ
+                จะไม่ถามว่า
+                <em>
+                  "เราควรซื้อซอฟต์แวร์หรือเทคโนโลยีใหม่อะไรบ้าง?"
+                </em>
+              </p>
+
+              <div class="flow">
+
+                <div class="flow-item">
+                  Business Strategy<br>
+                  กลยุทธ์ธุรกิจ
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  Information Systems<br>
+                  ระบบสารสนเทศ
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  Business Value<br>
+                  คุณค่าทางธุรกิจ
+                </div>
+
+              </div>
+
+              <p>
+                <strong>ตัวอย่างกระบวนการคิด:</strong>
+              </p>
+
+              <ol>
+                <li>
+                  <strong>เป้าหมายธุรกิจ:</strong>
+                  เราต้องการลดต้นทุนรวมในการดำเนินงานลง 10% 
+                </li>
+
+                <li>
+                  <strong>ระบบสารสนเทศที่เลือกใช้:</strong>
+                  ระบบตรวจสอบสต็อกและจัดส่งสินค้าอัตโนมัติ
+                  (Automated Inventory &amp; SCM)
+                </li>
+
+                <li>
+                  <strong>คุณค่าที่เกิดขึ้น:</strong>
+                  ต้นทุนคลังสินค้าลดลง
+                  ทันต่อความต้องการของลูกค้าอย่างเป็นรูปธรรม
+                </li>
+              </ol>
+
+              <h3>
+                3. ทำอย่างไร?
+                (โครงสร้างการทำ SWOT Analysis ที่มีประสิทธิภาพ)
+              </h3>
+
+              <p>
+                เครื่องมือพื้นฐานที่ใช้ในการเชื่อมโยงสภาพแวดล้อม
+                กับกลยุทธ์คือ <strong>SWOT Analysis</strong>
+              </p>
+
+              <div class="concept-grid">
+
+                <div class="concept-card">
+                  <strong>💪 Strengths</strong>
+                  ปัจจัยภายใน — สิ่งที่องค์กรทำได้ดี
+                </div>
+
+                <div class="concept-card">
+                  <strong>⚠️ Weaknesses</strong>
+                  ปัจจัยภายใน — ข้อจำกัดภายในองค์กร
+                </div>
+
+                <div class="concept-card">
+                  <strong>🚀 Opportunities</strong>
+                  ปัจจัยภายนอก — ปัจจัยบวกจากภายนอก
+                </div>
+
+                <div class="concept-card">
+                  <strong>🛑 Threats</strong>
+                  ปัจจัยภายนอก — ปัจจัยลบจากภายนอก
+                </div>
+
+              </div>
+
+              <ul>
+                <li>
+                  <strong>Strengths:</strong>
+                  สิ่งที่องค์กรทำได้ดี กระบวนการดี
+                  มีทรัพยากรไอทีสูง
+                </li>
+
+                <li>
+                  <strong>Weaknesses:</strong>
+                  ข้อจำกัดภายในองค์กร ขาดงบประมาณ
+                  ขาดความเชี่ยวชาญ
+                </li>
+
+                <li>
+                  <strong>Opportunities:</strong>
+                  ปัจจัยบวกภายนอก ตลาดเปิดใหม่
+                  เทคโนโลยีก้าวหน้า พฤติกรรมลูกค้าเอื้ออำนวย
+                </li>
+
+                <li>
+                  <strong>Threats:</strong>
+                  ปัจจัยลบภายนอก คู่แข่งตัดราคา
+                  กฎหมายหรือระเบียบข้อบังคับใหม่
+                </li>
+              </ul>
+
+              <p>
+                <strong>เกณฑ์การทำ SWOT ให้มีประสิทธิภาพสูง:</strong>
+              </p>
+
+              <ul>
+                <li>
+                  <strong>Realistic on S &amp; W:</strong>
+                  มองจุดอ่อนจุดแข็งตามความเป็นจริง
+                  ห้ามเข้าข้างตัวเอง
+                </li>
+
+                <li>
+                  <strong>Realistic on O &amp; T:</strong>
+                  ประเมินขนาดโอกาสและภัยคุกคาม
+                  โดยอาศัยข้อมูลเชิงลึกประกอบ
+                </li>
+
+                <li>
+                  <strong>Specific &amp; Simple:</strong>
+                  ต้องกระชับ ตรงประเด็น และเน้นเรื่องสำคัญจริง ๆ เท่านั้น
+                </li>
+
+                <li>
+                  <strong>Relative to Competitors:</strong>
+                  ต้องเปรียบเทียบข้อดีข้อเสียกับคู่แข่งขันหลักอยู่เสมอ
+                </li>
+              </ul>
+
+              <h3>4. ตัวอย่างการใช้ SIS ขององค์กรระดับโลก</h3>
+
+              <div class="info-box">
+                <strong>Walmart + Procter &amp; Gamble (P&amp;G)</strong>
+
+                <p>
+                  P&amp;G ได้รับอนุญาตให้เข้าถึงฐานข้อมูลคลังสินค้า
+                  ของศูนย์กระจายสินค้า Walmart โดยตรงผ่านระบบสารสนเทศ
+                  เชื่อมโยงเครือข่ายคู่ค้า เพื่อให้สามารถเติมสินค้าชั้นวาง
+                  ของ Walmart ได้ทันทีเมื่อยอดขายเพิ่มขึ้น
+                  ส่งผลให้ต้นทุนคลังสินค้าลดต่ำลงอย่างมาก
+                </p>
+              </div>
+
+              <p>
+                <strong>Netflix SWOT Analysis:</strong>
+              </p>
+
+              <ul>
+                <li>
+                  <em>S - Strengths:</em>
+                  แบรนด์ระดับโลก, Original Content คุณภาพสูง,
+                  แพลตฟอร์มมีประสิทธิภาพและเสถียรมาก
+                </li>
+
+                <li>
+                  <em>W - Weaknesses:</em>
+                  ต้นทุนลิขสิทธิ์ของผู้อื่นสูง,
+                  โมเดลธุรกิจแชร์เนื้อหาเลียนแบบได้ง่าย
+                </li>
+
+                <li>
+                  <em>O - Opportunities:</em>
+                  การขยายตลาดต่างประเทศเพิ่ม,
+                  การนำระบบ AI มาใช้ทำ Personalization
+                </li>
+              </ul>
+
+              <h3>5. เปรียบเทียบมุมมองต่อระบบสารสนเทศ</h3>
+
+              <div class="table-wrap">
+                <table class="e-rte-table">
+
+                  <thead>
+                    <tr>
+                      <th>หัวข้อ</th>
+                      <th>มุมมองแบบดั้งเดิม</th>
+                      <th>มุมมองเชิงกลยุทธ์ (SIS)</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr>
+                      <td><strong>สถานะของไอที</strong></td>
+                      <td>
+                        เครื่องมือสนับสนุนสำนักงานและช่วยลดต้นทุน
+                        ธุรการประจำวัน
+                      </td>
+                      <td>
+                        เครือข่ายการแข่งขันหลัก
+                        (Competitive Networks)
+                        และอาวุธสร้างกลยุทธ์
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>บทบาทต่อกระบวนการ</strong></td>
+                      <td>
+                        ปรับปรุงระบบงานเดิมให้เร็วขึ้น
+                        (Automation)
+                      </td>
+                      <td>
+                        ปรับรื้อกระบวนการใหม่เพื่อความอยู่รอด
+                        ในตลาดดิจิทัล (Reengineer)
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>ผลลัพธ์สูงสุด</strong></td>
+                      <td>
+                        ทำงานสะดวกรวดเร็วขึ้น
+                        เอกสารจัดระเบียบดีขึ้น
+                      </td>
+                      <td>
+                        สร้างความได้เปรียบในการแข่งขัน
+                        ที่คู่แข่งรายอื่นเลียนแบบได้ยาก
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>6. จุดสำคัญ</h3>
+
+              <div class="box key">
+                <div class="box-title">⭐ Concept ที่ต้องเข้าใจ</div>
+                ไอทีไม่มีประโยชน์เชิงกลยุทธ์เลยหากไม่ถูกบูรณาการ
+                เข้ากับทิศทางเป้าหมายรวมของธุรกิจ
+                (Business Strategy)
+              </div>
+
+              <div class="box warning">
+                <div class="box-title">⚠️ จุดที่มักเข้าใจผิด</div>
+                คิดว่าการใช้เทคโนโลยีที่ล้ำสมัยที่สุดจะการันตี
+                การได้เปรียบในการแข่งขันเสมอ
+                แท้จริงแล้วความได้เปรียบเกิดจากวิธีการประยุกต์ใช้
+                เทคโนโลยีให้เหมาะสมกับพนักงานและกระบวนการทำงานต่างหาก
+              </div>
+
+              <div class="box exam">
+                <div class="box-title">📝 ประเด็นที่มีโอกาสออกสอบ</div>
+                คำจำกัดความของระบบสารสนเทศเชิงกลยุทธ์ (SIS)
+                และการจับคู่กลยุทธ์ในการทำ SWOT Matrix
+                เพื่อเอาชนะคู่แข่งขัน
+              </div>
+
+            </div>
+          </section>
+
+          <!-- =========================
+               CHAPTER 5
+          ========================= -->
+
+          <section class="section chapter" id="chapter5">
+
+            <div class="chapter-header">
+              <div class="chapter-number">05</div>
+
+              <div class="chapter-title">
+                📁 บทที่ 5: ระบบสารสนเทศเพื่อการบริหารทรัพยากรบุคคล
+                (Human Resource Information Systems)
+              </div>
+            </div>
+
+            <div class="chapter-body">
+
+              <h3>1. คืออะไร?</h3>
+
+              <ul>
+                <li>
+                  <strong>ความหมาย:</strong>
+                  <strong>
+                    ระบบสารสนเทศทรัพยากรบุคคล
+                    (Human Resource Information System: HRIS/HRMS)
+                  </strong>
+                  คือ ซอฟต์แวร์แอปพลิเคชันที่ใช้จัดเก็บ วิเคราะห์
+                  ประมวลผล และรายงานข้อมูลบุคลากรเพื่อสนับสนุน
+                  การบริหารจัดการทรัพยากรมนุษย์ในองค์กรอย่างมีประสิทธิภาพ
+                </li>
+
+                <li>
+                  <strong>แนวคิดหลัก:</strong>
+                  การใช้เทคโนโลยีและข้อมูลเพื่อสนับสนุนกระบวนการสรรหา
+                  พัฒนา ประเมินผล และดูแลรักษาพนักงาน
+                  เพื่อดึงศักยภาพสูงสุดของพนักงานมาขับเคลื่อนธุรกิจ
+                </li>
+
+                <li>
+                  <strong>จุดประสงค์:</strong>
+                  เพื่อเปลี่ยนบทบาทของงานฝ่ายบุคคล (HR)
+                  จากงานธุรการและเอกสารที่เป็นต้นทุน
+                  (Transactional HR) สู่การเป็นพันธมิตรทางธุรกิจเชิงกลยุทธ์
+                  (Strategic HR partner)
+                </li>
+
+                <li>
+                  <strong>ใช้ทำอะไร:</strong>
+                  ใช้คาดการณ์อัตรากำลัง คัดกรองใบสมัคร
+                  ประมวลผลเงินเดือน วางแผนการฝึกอบรม
+                  และจัดการประเมินผลออนไลน์
+                </li>
+              </ul>
+
+              <h3>2. อธิบายให้เข้าใจ</h3>
+
+              <p>
+                ในการพัฒนาหรือวิเคราะห์ระบบ HRIS สำหรับนักศึกษาไอที
+                คุณต้องเข้าใจโครงสร้างการบูรณาการข้อมูลซึ่งเปรียบเสมือน
+                <strong>โมดูลการทำงานที่เชื่อมโยงกัน
+                (Modular Integration)</strong> ดังนี้:
+              </p>
+
+              <div class="concept-grid">
+
+                <div class="concept-card">
+                  <strong>👤 Employee Data</strong>
+                  ข้อมูลประวัติพนักงานเป็นฐานข้อมูลหลัก
+                  เชื่อมต่อเข้ากับทุกโมดูล
+                </div>
+
+                <div class="concept-card">
+                  <strong>💰 Payroll</strong>
+                  ข้อมูลเวลาทำงานส่งต่อไปคำนวณเงินเดือน
+                  เบี้ยขยัน และภาษี
+                </div>
+
+                <div class="concept-card">
+                  <strong>📚 LMS</strong>
+                  ข้อมูลทักษะช่วยระบุ Skill Gap
+                  และแนะนำคอร์สอบรม 
+                </div>
+
+                <div class="concept-card">
+                  <strong>📊 Performance</strong>
+                  ผลประเมินออนไลน์เชื่อมต่อกับการพิจารณา
+                  โบนัสและเลื่อนตำแหน่ง
+                </div>
+
+              </div>
+
+              <ol>
+                <li>
+                  <strong>ข้อมูลประวัติพนักงาน:</strong>
+                  เป็นฐานข้อมูลหลักเชื่อมต่อเข้ากับทุกโมดูล
+                </li>
+
+                <li>
+                  <strong>
+                    โมดูลประมวลผลเวลาทำงานและเงินเดือน (Payroll):
+                  </strong>
+                  เมื่อพนักงานรูดบัตรเข้าทำงาน ข้อมูลจะถูกบันทึก
+                  และส่งต่อไปคำนวณเงินเดือน เบี้ยขยัน
+                  และหักภาษีมูลค่าเพิ่ม ณ ที่จ่ายโดยอัตโนมัติ
+                </li>
+
+                <li>
+                  <strong>โมดูลฝึกอบรมและการเรียนรู้ (LMS):</strong>
+                  ข้อมูลทักษะของพนักงานช่วยระบุช่องว่าง (Skill Gap)
+                  เพื่อแนะนำคอร์สอบรมที่เหมาะสม
+                </li>
+
+                <li>
+                  <strong>โมดูลประเมินผลงาน (Performance Module):</strong>
+                  ผลประเมินรายบุคคลออนไลน์จะเชื่อมต่อเพื่อพิจารณา
+                  การจ่ายโบนัสประจำปีและเลื่อนตำแหน่งอย่างเทียงธรรม
+                  และโปร่งใส
+                </li>
+              </ol>
+
+              <h3>
+                3. ทำงานอย่างไร?
+                (โมดูลวางแผนกำลังคน: Manpower Planning Process)
+              </h3>
+
+              <div class="flow">
+
+                <div class="flow-item">
+                  วิเคราะห์ปัจจุบัน<br>
+                  Current Analysis
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  คาดการณ์อนาคต<br>
+                  Forecast
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  Gap Analysis<br>
+                  หาส่วนขาด
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-item">
+                  Strategy<br>
+                  สรรหา / พัฒนา
+                </div>
+
+              </div>
+
+              <ul>
+                <li>
+                  <strong>วิเคราะห์ปัจจุบัน:</strong>
+                  ทราบกำลังพลและสมรรถนะ ณ ปัจจุบันอย่างถูกต้อง
+                  ตามข้อมูลจริง
+                </li>
+
+                <li>
+                  <strong>คาดการณ์อนาคต:</strong>
+                  คาดการณ์ล่วงหน้าตามแผนการเติบโต
+                  หรือการขยายสาขาใหม่ของธุรกิจ
+                </li>
+
+                <li>
+                  <strong>Gap Analysis:</strong>
+                  ชี้วัดให้เห็นอย่างชัดเจนว่าเราต้องการคนที่มีทักษะประเภทใด
+                  จำนวนเท่าใด และเมื่อใด
+                </li>
+
+                <li>
+                  <strong>กำหนดกลยุทธ์:</strong>
+                  เพื่อสรรหาบุคคลให้เหมาะสม ทันเวลา
+                  และด้วยงบประมาณที่คุ้มค่าที่สุด
+                </li>
+              </ul>
+
+              <h3>4. ตัวอย่างการใช้ AI ในกระบวนการสรรหา (AI in Recruitment)</h3>
+
+              <p>
+                ปัจจุบันระบบสรรหานิยมนำ AI มาปฏิวัติวงการ
+                เพื่อลดเวลาและต้นทุนด้วยกระบวนการดังนี้:
+              </p>
+
+              <ul>
+                <li>
+                  <strong>AI Matching Tools:</strong>
+                  ระบบนำเอา AI มาอ่านเอกสารประวัติ (Resume)
+                  คัดกรองและจับคู่คุณสมบัติให้เข้ากับ
+                  Job Specification ที่บริษัทระบุไว้ภายใน 5 วินาที
+                </li>
+
+                <li>
+                  <strong>Testing &amp; Scheduling:</strong>
+                  คอร์สนัดหมายผู้ประเมินและผู้สมัคร
+                  ตารางส่งแบบทดสอบออนไลน์อัตโนมัติผ่านอีเมล 
+                </li>
+
+                <li>
+                  <strong>Auto-Onboarding:</strong>
+                  ย้ายข้อมูลคนเก่งที่ผ่านเกณฑ์ไปสู่ฐานข้อมูลระบบหลักทันที
+                  เพื่อเปิดบัญชีพนักงานใหม่โดยไม่ต้องให้เจ้าหน้าที่
+                  คีย์ข้อมูลใหม่ซ้ำ
+                </li>
+              </ul>
+
+              <h3>5. เปรียบเทียบผู้ใช้สารสนเทศในระบบ HRIS</h3>
+
+              <div class="table-wrap">
+
+                <table class="e-rte-table">
+
+                  <thead>
+                    <tr>
+                      <th>ผู้ใช้งานระบบ</th>
+                      <th>ความต้องการข้อมูลหลัก</th>
+                      <th>วิธีการใช้ประโยชน์เชิงลึก</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr>
+                      <td>
+                        <strong>
+                          พนักงานทั่วไป
+                          (ESS: Employee Self-Service)
+                        </strong>
+                      </td>
+
+                      <td>
+                        ข้อมูลประวัติส่วนตัว, วันลาคงเหลือ,
+                        รายละเอียดผลประโยชน์ของตน
+                      </td>
+
+                      <td>
+                        ใช้ส่งใบลาพักร้อนออนไลน์ ตรวจสอบสลิปเงินเดือน
+                        ได้อย่างสะดวก รวดเร็ว และไม่ต้องผ่านแผนกบุคคล
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <strong>
+                          หัวหน้างาน / ผู้บริหาร
+                          (Supervisors)
+                        </strong>
+                      </td>
+
+                      <td>
+                        แดชบอร์ดผลงาน, บันทึกการเข้างานของทีม,
+                        ประวัติฝึกอบรมของพนักงาน
+                      </td>
+
+                      <td>
+                        ใช้ประเมินระดับความพร้อมของทีม
+                        วางแผนทดแทนคน และตัดสินใจเรื่องอัตรากำลังพล
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <strong>
+                          หน่วยงานภายนอก
+                          (ประกันสังคม, สรรพากร)
+                        </strong>
+                      </td>
+
+                      <td>
+                        ข้อมูลภาษีเงินได้,
+                        เงินสมทบประกันสังคมที่ถูกต้องตามกฎหมายกำหนด
+                      </td>
+
+                      <td>
+                        ใช้ตรวจสอบความโปร่งใส ความถูกต้องของการทำงาน
+                        และสอดคล้องกับระเบียบกฎหมายแรงงาน 
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+              </div>
+
+              <h3>6. จุดสำคัญ</h3>
+
+              <div class="box key">
+                <div class="box-title">⭐ Concept ที่ต้องเข้าใจ</div>
+                ข้อมูลของระบบ HR เป็นข้อมูลที่มีความสำคัญ อ่อนไหวสูง
+                นักออกแบบระบบและนักพัฒนาซอฟต์แวร์ต้องตระหนักถึง
+                ความปลอดภัยทางไซเบอร์และข้อกฎหมายอย่างเคร่งครัด
+                เช่น <strong>กฎหมายคุ้มครองข้อมูลส่วนบุคคล (PDPA)</strong>
+              </div>
+
+              <div class="box warning">
+                <div class="box-title">⚠️ จุดที่มักเข้าใจผิด</div>
+                คิดว่า HRIS เป็นหน้าที่และดูแลรับผิดชอบของฝ่าย HR
+                เพียงแผนกเดียว แท้จริงแล้วระบบถูกออกแบบมาเพื่อให้
+                พนักงานทุกฝ่ายและผู้บริหารทุกคนเข้ามามีส่วนร่วม
+                ในการทำธุรกรรมร่วมกัน เช่น การลาออนไลน์
+                และการประเมินผล 360 องศา
+              </div>
+
+              <div class="box exam">
+                <div class="box-title">📝 ประเด็นที่มีโอกาสออกสอบ</div>
+
+                <ul>
+                  <li>
+                    ความแตกต่างระหว่างสวัสดิการตามกฎหมายแรงงาน
+                    (Statutory) เช่น ค่าชดเชยเมื่อเลิกจ้าง
+                    และสวัสดิการที่บริษัทจัดหาให้เพิ่มเติม
+                    (Voluntary) เพื่อดึงดูดใจพนักงาน
+                    เช่น กองทุนสำรองเลี้ยงชีพ
+                  </li>
+
+                  <li>
+                    การนำ AI เข้ามาลดความซ้ำซ้อนของกระบวนการในแผนกบุคคล
+                    (เปลี่ยน HR จาก Cost Center สู่ Strategic Driver)
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- =========================
+               CHEAT SHEET
+          ========================= -->
+
+          <section class="section" id="cheatsheet">
+
+            <div class="cheat-sheet">
+
+              <h1>
+                📝 ส่วนที่ 2: ทำชีทสรุปเตรียมตัวสอบ
+                (Exam Cheat Sheet &amp; Reference)
+              </h1>
+
+              <hr>
+
+              <h2>📌 1. Key Concepts (แนวคิดสำคัญของวิชา)</h2>
+
+              <div class="cheat-grid">
+
+                <div class="cheat-card">
+                  <strong>IT Alignment</strong>
+                  ไอทีไม่ได้ซื้อมาเพียงเพราะความล้ำสมัย
+                  แต่ระบบไอทีต้องตอบสนองวัตถุประสงค์เชิงกลยุทธ์
+                  สูงสุดขององค์กร
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Transformation &amp; Value-added</strong>
+                  รับ Data มาประมวลผลเพิ่มคุณค่าให้กลายเป็น
+                  Information ที่นำไปใช้วางแผนงานได้จริง
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Modular Integration</strong>
+                  ระบบฐานข้อมูลกลางทำให้โมดูลย่อยต่าง ๆ
+                  เห็นข้อมูลที่เป็นปัจจุบันและตรงกัน
+                  (Single Source of Truth)
+                </div>
+
+                <div class="cheat-card">
+                  <strong>BPR</strong>
+                  การปรับปรุงเชิงลึกที่มุ่งหวังผลลัพธ์แบบก้าวกระโดด
+                  ผ่านการออกแบบขั้นตอนใหม่ทั้งหมด
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- =========================
+               VOCABULARY
+          ========================= -->
+
+          <section class="section" id="vocabulary">
+
+            <h2>📖 2. คำศัพท์ที่ต้องรู้ก่อนเข้าสอบ (Exam Vocabulary)</h2>
+
+            <div class="table-wrap">
+
+              <table class="e-rte-table">
+
+                <thead>
+                  <tr>
+                    <th>Term</th>
+                    <th>ความหมายที่แท้จริง</th>
+                    <th>วิธีจำง่าย ๆ สไตล์ติวเตอร์</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+                    <td>
+                      <strong>Information Systems (IS)</strong>
+                    </td>
+                    <td>
+                      ระบบที่มีคน ข้อมูล กระบวนการ
+                      ทำงานร่วมกันเพื่อจัดการสารสนเทศ
+                    </td>
+                    <td>
+                      <strong>"ระบบครัวทั้งหมด"</strong>
+                      มีเชฟ ลูกค้า วัตถุดิบ และเตาอบ
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Information Technology (IT)</strong>
+                    </td>
+                    <td>
+                      เทคโนโลยี เครื่องมือ และฮาร์ดแวร์/ซอฟต์แวร์
+                      ที่ใช้จัดการข้อมูล
+                    </td>
+                    <td>
+                      <strong>"เครื่องมือในครัว"</strong>
+                      เช่น เตาอบ มีด เตาแก๊ส
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>TPS (Transaction Processing Systems)</strong>
+                    </td>
+                    <td>
+                      ระบบประมวลผลธุรกรรมประจำวัน
+                      ของหน้างานปฏิบัติการ
+                    </td>
+                    <td>
+                      <strong>"บันทึกหน้าร้าน"</strong>
+                      เช่น ยอดขายวันนี้, แสกนบาร์โค้ดสินค้า
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>MIS (Management Information Systems)</strong>
+                    </td>
+                    <td>
+                      ระบบรายงานข้อมูลที่ผ่านการสรุปและจัดรูปแบบไว้ล่วงหน้า
+                      ให้ผู้บริหารระดับกลาง
+                    </td>
+                    <td>
+                      <strong>"สรุปยอดรายงานผู้จัดการ"</strong>
+                      เช่น รายงานยอดขายรายเดือนแยกตามภาค
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>BPR (Business Process Reengineering) </strong>
+                    </td>
+                    <td>
+                      การคิดทบทวนและออกแบบกระบวนการทำงานใหม่หมด
+                      อย่างถอนรากถอนโคน
+                    </td>
+                    <td>
+                      <strong>"ทุบตึกสร้างใหม่"</strong>
+                      ไม่ใช่แค่การปัดฝุ่นทาสีทับงานเดิม
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Job Specification</strong>
+                    </td>
+                    <td>
+                      รายละเอียดระบุคุณสมบัติของผู้สมัคร
+                      ที่จะมารับตำแหน่งงาน
+                    </td>
+                    <td>
+                      <strong>"สเปกคน"</strong>
+                      เช่น ต้องจบปริญญาตรี มีทักษะเขียนโปรแกรม
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Job Description</strong>
+                    </td>
+                    <td>
+                      รายละเอียดหน้าที่ความรับผิดชอบ
+                      ที่ต้องทำในตำแหน่งนั้น
+                    </td>
+                    <td>
+                      <strong>"สเปกงาน"</strong>
+                      บอกว่าต้องทำอะไรในแต่ละวัน
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>PDPA</strong>
+                    </td>
+                    <td>
+                      กฎหมายคุ้มครองข้อมูลส่วนบุคคล
+                      มีความสำคัญยิ่งต่อระบบจัดเก็บข้อมูลพนักงาน
+                    </td>
+                    <td>
+                      <strong>"กฎหมายห้ามละเมิดข้อมูลส่วนตัว"</strong>
+                      เช่น ห้ามเผยแพร่ข้อมูลสลิปเงินเดือนผู้อื่น
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+
+          </section>
+
+          <!-- =========================
+               UNDERSTANDING
+          ========================= -->
+
+          <section class="section" id="understanding">
+
+            <h2>🧠 3. สิ่งที่ต้องเข้าใจ (Understanding Guide)</h2>
+
+            <div class="concept">
+
+              <strong>
+                Data → Information → Knowledge
+              </strong>
+
+              <ul>
+
+                <li>
+                  <strong>Data (ข้อมูล):</strong>
+                  คือ สัจจะหรือข้อเท็จจริงดิบที่ยังไม่มีการคัดกรอง
+                  หรือแปรสภาพ
+                </li>
+
+                <li>
+                  <strong>Information (สารสนเทศ):</strong>
+                  ข้อมูลดิบที่ถูกนำมาแปรสภาพ จัดกลุ่มคำนวณ
+                  จนผู้รับสารนำไปทำความเข้าใจเพื่อใช้งานเฉพาะด้าน
+                  ได้ทันที 
+                </li>
+
+                <li>
+                  <strong>Knowledge (ความรู้):</strong>
+                  สารสนเทศที่ถูกตกผลึกและผสมผสานร่วมกับประสบการณ์
+                  จนสร้างเป็นกฎ ทฤษฎี หรือแนวทางปฏิบัติงาน
+                </li>
+
+              </ul>
+
+            </div>
+
+            <div class="info-box">
+
+              <strong>🔓 ระบบเปิด (Open System) vs ระบบปิด (Closed System)</strong>
+
+              <ul>
+                <li>
+                  องค์กรธุรกิจคือ <strong>ระบบเปิด (Open System)</strong>
+                  เสมอ เพราะธุรกิจต้องจัดหาวัตถุดิบภายนอก
+                  จากซัพพลายเออร์ และจำหน่ายสินค้าแก่กลุ่มลูกค้า
+                  ภายนอกองค์กร
+                </li>
+              </ul>
+
+            </div>
+
+          </section>
+
+          <!-- =========================
+               MEMORIZATION
+          ========================= -->
+
+          <section class="section" id="memorization">
+
+            <h2>⭐ 4. สิ่งที่ต้องจำก่อนเข้าห้องสอบ (Memorization Points)</h2>
+
+            <h3>1. บทบาทสำคัญ 3 ประการของ IS ในองค์กร</h3>
+
+            <div class="quick-grid">
+
+              <div class="quick-card">
+                <div class="quick-icon">⚙️</div>
+                <strong>1. Business Processes</strong>
+                Support business processes and operations
+              </div>
+
+              <div class="quick-card">
+                <div class="quick-icon">🧠</div>
+                <strong>2. Decision Making</strong>
+                Support managerial decision making
+              </div>
+
+              <div class="quick-card">
+                <div class="quick-icon">🏆</div>
+                <strong>3. Strategic Advantage</strong>
+                Support strategic advantage
+              </div>
+
+              <div class="quick-card">
+                <div class="quick-icon">🔗</div>
+                <strong>4. Integration</strong>
+                เชื่อมโยงข้อมูลและกระบวนการทั่วองค์กร
+              </div>
+
+            </div>
+
+            <h3>2. ขั้นตอนในการจัดทำแผนกำลังคน</h3>
+
+            <div class="flow">
+
+              <div class="flow-item">
+                วิเคราะห์กำลังคนปัจจุบัน
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                คาดการณ์ความต้องการอนาคต
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                Gap Analysis
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                สรรหา / พัฒนา
+              </div>
+
+            </div>
+
+            <h3>3. สวัสดิการพนักงานตามกฎหมายแรงงาน</h3>
+
+            <ul>
+              <li>ค่าจ้างขั้นต่ำ</li>
+              <li>ค่าล่วงเวลา (OT)</li>
+              <li>ประกันสังคม (Social Security)</li>
+              <li>ค่าชดเชยกรณีถูกเลิกจ้างอย่างไม่เป็นธรรม</li>
+              <li>วันหยุดขั้นต่ำตามที่กฎหมายกำหนด</li>
+            </ul>
+
+            <h3>4. วิวัฒนาการของระบบสารสนเทศ (Evolution of IS)</h3>
+
+            <div class="flow">
+
+              <div class="flow-item">
+                1950s<br>
+                Data Processing
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                1960s<br>
+                MIS
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                1970s<br>
+                DSS
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                1980s<br>
+                SIS
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                1990s<br>
+                E-Business
+              </div>
+
+              <div class="arrow">→</div>
+
+              <div class="flow-item">
+                2000s<br>
+                ERP &amp; BI
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- =========================
+               CONFUSING
+          ========================= -->
+
+          <section class="section" id="confusing">
+
+            <h2>
+              ⚠️ 5. จุดที่มักสับสนในข้อสอบ
+              (Confusing Points Table)
+            </h2>
+
+            <div class="table-wrap">
+
+              <table class="e-rte-table">
+
+                <thead>
+                  <tr>
+                    <th>จุดสับสน</th>
+                    <th>หัวข้อ A</th>
+                    <th>หัวข้อ B</th>
+                    <th>ตัวอย่างประกอบ</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+                    <td>
+                      <strong>เครื่องมือช่วยตัดสินใจ</strong>
+                    </td>
+
+                    <td>
+                      <strong>
+                        DSS (Decision Support Systems)
+                      </strong>
+                    </td>
+
+                    <td>
+                      <strong>
+                        EIS (Executive Information Systems)
+                      </strong>
+                    </td>
+
+                    <td>
+                      ผู้บริหารระดับกลางใช้ DSS คำนวณแบบจำลอง
+                      เปรียบเทียบยอดขายหากขึ้นราคาสินค้า
+                      แต่ CEO ระดับสูงใช้ EIS ดูแดชบอร์ดสรุป
+                      ทิศทางตลาดเพื่อเข้าควบรวมกิจการ
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>โมดูลการสรรหา</strong>
+                    </td>
+
+                    <td>
+                      <strong>Recruitment</strong>
+                    </td>
+
+                    <td>
+                      <strong>Selection</strong>
+                    </td>
+
+                    <td>
+                      การประกาศรับสมัครงานผ่าน Facebook คือ
+                      <strong>Recruitment</strong>
+                      แต่การนำ Resume มาสัมภาษณ์เชิงลึก
+                      คัดกรองจนได้คนที่ดีที่สุดคือ
+                      <strong>Selection</strong>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>ลักษณะการปรับปรุงงาน</strong>
+                    </td>
+
+                    <td>
+                      <strong>
+                        Rationalization
+                      </strong>
+                    </td>
+
+                    <td>
+                      <strong>
+                        Reengineering (BPR)
+                      </strong>
+                    </td>
+
+                    <td>
+                      การปรับแก้ขัดเกลารูปแบบฟอร์มเอกสารเดิม
+                      ให้สั้นลงคือ Rationalization
+                      แต่การทุบขั้นตอนเดิมทิ้งแล้วอนุมัติผ่าน
+                      แอปพลิเคชันมือถือใน 5 วินาทีคือ
+                      Reengineering (BPR)
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+
+          </section>
+
+          <!-- =========================
+               PRACTICAL
+          ========================= -->
+
+          <section class="section">
+
+            <h2>
+              💻 6. สูตรและโครงสร้างข้อมูลที่ใช้จริง
+              (Practical Formulas &amp; Database Design)
+            </h2>
+
+            <div class="memory">
+
+              <strong>
+                📊 Employee Turnover Rate
+              </strong>
+
+              <p>
+                Turnover Rate (%) =
+                (จำนวนพนักงานที่ลาออกในช่วงเวลานั้น
+                ÷ จำนวนพนักงานเฉลี่ยทั้งหมด)
+                × 100
+              </p>
+
+            </div>
+
+            <h3>
+              โครงสร้างความสัมพันธ์ฐานข้อมูล
+              (Database Schema) ในระบบ HRIS
+            </h3>
+
+            <div class="concept-grid">
+
+              <div class="concept-card">
+
+                <strong>👤 Employee</strong>
+
+                <ul>
+                  <li>
+                    <code>Employee_ID</code>
+                    Primary Key
+                  </li>
+
+                  <li>
+                    <code>First_Name</code>
+                  </li>
+
+                  <li>
+                    <code>Last_Name</code>
+                  </li>
+
+                  <li>
+                    <code>Department_ID</code>
+                    Foreign Key
+                  </li>
+
+                  <li>
+                    <code>Position</code>
+                  </li>
+                </ul>
+
+              </div>
+
+              <div class="concept-card">
+
+                <strong>💰 Payroll</strong>
+
+                <ul>
+                  <li>
+                    <code>Payroll_ID</code>
+                    Primary Key
+                  </li>
+
+                  <li>
+                    <code>Employee_ID</code>
+                    Foreign Key
+                  </li>
+
+                  <li>
+                    <code>Basic_Salary</code>
+                  </li>
+
+                  <li>
+                    <code>OT_Hours</code>
+                  </li>
+
+                  <li>
+                    <code>Net_Pay</code>
+                  </li>
+                </ul>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        
+
+          <!-- =========================
+               FINAL CHEAT SHEET
+          ========================= -->
+
+          <section class="section" id="final">
+
+            <div class="cheat-sheet">
+
+              <h2>
+                🚨 8. Exam Cheat Sheet:
+                อ่านด่วนก่อนเดินเข้าห้องสอบ!
+              </h2>
+
+              <div class="cheat-grid">
+
+                <div class="cheat-card">
+                  <strong>IS ≠ IT</strong>
+                  IS มีคน ข้อมูล กระบวนการ
+                  ส่วน IT มีเครื่องมือทางเทคนิค
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Decision Levels</strong>
+                  Strategic → Tactical → Operational
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Strategic</strong>
+                  Unstructured / EIS
+                  คุมอนาคต
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Tactical</strong>
+                  Semi-structured / MIS
+                  คุมแผนงาน
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Operational</strong>
+                  Structured / TPS
+                  คุมงานประจำวัน
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Evolution</strong>
+                  TPS → MIS → DSS → SIS →
+                  e-Business → ERP &amp; BI
+                </div>
+
+                <div class="cheat-card">
+                  <strong>BPR</strong>
+                  รื้อทำใหม่หมด
+                  (Radical Redesign)
+                  ไม่ใช่ปรับงานเดิมให้เร็วขึ้น
+                </div>
+
+                <div class="cheat-card">
+                  <strong>SWOT</strong>
+                  S/W = Internal
+                  <br>
+                  O/T = External
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Manpower Planning</strong>
+                  Right People +
+                  Right Skills +
+                  Right Number +
+                  Right Time
+                </div>
+
+                <div class="cheat-card">
+                  <strong>HRIS Modular System</strong>
+                  Employee Data เป็นแกนกลางเชื่อม
+                  Recruitment ↔ Payroll ↔ Training ↔ Performance
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Data → Information → Knowledge</strong>
+                  Raw Data → Processed Information
+                  → Experience / Understanding
+                </div>
+
+                <div class="cheat-card">
+                  <strong>Profit</strong>
+                  Revenue Streams − Cost Structure
+                </div>
+
+              </div>
+
+              <hr>
+
+              <h3>🧠 จำให้ได้ก่อนเข้าห้องสอบ</h3>
+
+                <div class="memory">
+
+                    <p>
+                    <strong>IS</strong>
+                    = คน + ข้อมูล + กระบวนการ + เทคโนโลยี
+                    </p>
+
+                    <p>
+                    <strong>IT</strong>
+                    = เครื่องมือทางเทคโนโลยี
+                    </p>
+
+                    <p>
+                    <strong>TPS</strong>
+                    = งานประจำวัน
+                    </p>
+
+                    <p>
+                    <strong>MIS</strong>
+                    = รายงานสำหรับผู้บริหารระดับกลาง
+                    </p>
+
+                    <p>
+                    <strong>DSS</strong>
+                    = ช่วยวิเคราะห์และตัดสินใจ
+                    </p>
+
+                    <p>
+                    <strong>EIS</strong>
+                    = ข้อมูลภาพรวมสำหรับผู้บริหารระดับสูง
+                    </p>
+
+                    <p>
+                    <strong>BPR</strong>
+                    = รื้อกระบวนการใหม่
+                    </p>
+
+                    <p>
+                    <strong>SWOT</strong>
+                    = S/W ภายใน + O/T ภายนอก
+                    </p>
+
+                    <p>
+                    <strong>HRIS</strong>
+                    = ระบบสารสนเทศสำหรับบริหารบุคลากร
+                    </p>
+
+                    <p>
+                    <strong>PDPA</strong>
+                    = คุ้มครองข้อมูลส่วนบุคคล
+                    </p>
+
+                </div>
+
+              <hr>
+
+              <p style="text-align:center; font-size:16px;">
+                <em>
+                  ขอให้โชคดีในการทำข้อสอบ!
+                  ความสอดคล้องระหว่างกลยุทธ์ เทคโนโลยี
+                  และบุคลากร คือหัวใจของความสำเร็จ
+                </em>
+              </p>
+
+            </div>
+
+          </section>
+
+        </div>
+
+        <footer>
+          📘 Business Information Systems — Exam Cheat Sheet
+          <br>
+          <span>
+            Strategy × Technology × People × Business Value
+          </span>
+        </footer>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    if (menuBtn) {
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("menu-open");
+      });
+    }
+
+    document.querySelectorAll(".nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        sidebar.classList.remove("menu-open");
+      });
+    });
+
+    /* =========================
+       DARK MODE
+    ========================= */
+
+    const darkBtn = document.getElementById("darkBtn");
+
+    if (localStorage.getItem("bis-dark-mode") === "true") {
+      document.body.classList.add("dark");
+      darkBtn.textContent = "☀️";
+    }
+
+    darkBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      const isDark = document.body.classList.contains("dark");
+
+      localStorage.setItem("bis-dark-mode", isDark);
+
+      darkBtn.textContent = isDark ? "☀️" : "🌙";
+    });
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    const searchInput = document.getElementById("searchInput");
+    const sections = document.querySelectorAll(".content .section");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+
+      sections.forEach(section => {
+        const text = section.innerText.toLowerCase();
+
+        if (!query || text.includes(query)) {
+          section.classList.remove("hidden-search");
+        } else {
+          section.classList.add("hidden-search");
+        }
+      });
+    });
+
+    /* =========================
+       READING PROGRESS
+    ========================= */
+
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+      const progress =
+        documentHeight > 0
+          ? Math.min(100, Math.max(0, (scrollTop / documentHeight) * 100))
+          : 0;
+
+      progressBar.style.width = progress + "%";
+      progressText.textContent = Math.round(progress) + "%";
+    }
+
+    window.addEventListener("scroll", updateProgress);
+    updateProgress();
+
+    /* =========================
+       ACTIVE SIDEBAR
+    ========================= */
+
+    const navLinks = document.querySelectorAll(".nav a");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+              link.classList.remove("active");
+
+              if (link.getAttribute("href") === "#" + entry.target.id) {
+                link.classList.add("active");
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: "-20% 0px -65% 0px"
+      }
+    );
+
+    document
+      .querySelectorAll(".content .section[id]")
+      .forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
